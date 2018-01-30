@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+    @media (min-width: 200px) {
+      .container{
+          max-width: 970px;
+      }
+    }
+
+    .post-title {
+    font-size: 1.95em;
+    }
+
+    .post-info {
+    padding-bottom: 15px;
+    font-size: .9em;
+    }
+
+    .post-body {
+    padding-bottom: 30px;
+    color: #555;
+    }
+
+    .line {
+    height: 3px;
+    background-color: #34495e;
+    }
+
+    .navbar {
+    min-height: 50px;
+    }
+
+    .navbar-default {
+    border: 0px
+    }
+
+    .navbar-brand {
+    padding: 0 15px;
+    height: 50px;
+    line-height: 50px;
+    }
+
+    .navbar-toggle {
+    /* (80px - button height 34px) / 2 = 23px */
+    margin-top: 8px;
+    padding: 9px 10px !important;
+    }
+
+    @media (min-width: 768px) {
+    .navbar-nav > li > a {
+      /* (80px - line-height of 27px) / 2 = 26.5px */
+      padding-top: 11.5px;
+      padding-bottom: 11.5px;
+      line-height: 27px;
+    }
+
+    }
+
+    /*Global*/
+
+    .btn.btn-main {
+    border-radius: 0;
+    border: 0;
+    color: #fff;
+    background: #2980b9;
+    }
+
+    .btn.btn-main:hover {
+    color: #fff;
+    background: #216796;
+    }
+
+    .btn.btn-default {
+    border-radius: 0;
+    border: 0;
+    color: #666;
+    background: #f0f0f0;
+    }
+
+    .btn.btn-default:hover {
+    color: #f0f0f0;
+    background: #bbb;
+    }
+
+    .btn.btn-post {
+    border-radius: 0;
+    border: 0;
+    color: #999;
+    background: #fff;
+    }
+
+    .btn.btn-post:hover {
+    color: #555;
+    background: #f0f0f0;
+    }
+
+    .btn.btn-post-reply {
+    border-radius: 0;
+    border: 0;
+    color: #555;
+    background: #fff;
+    }
+
+    .btn.btn-post-reply:hover {
+    color: #555;
+    background: #f0f0f0;
+    }
+
+    .fa-padding {
+    padding-right: 9px;
+    }
+
+    blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    }
+    blockquote:before {
+    color: #ccc;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+    }
+    blockquote p {
+    display: inline;
+    }
+
+    .right-message {
+      /* background: #6BB9F0; */
+      border-bottom: 1px solid #ddd;
+      width: 100%;
+      padding: 5px;
+      color: #bbb;
+    }
+    </style>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+    <title>Forumly</title>
+  </head>
+  <body>
+    <!-- navbar -->
+    <div class="line"></div>
+      <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">
+            <i class="fa fa-code" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/topics">Topics</a></li>
+          </ul>
+          <!-- right navigation -->
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="#">My Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
