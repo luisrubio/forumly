@@ -1,5 +1,13 @@
+<% include ../partials/header %>
+
 <h1>Topics INDEX</h1>
+
+<p>
+  <a class="btn btn-danger" href="/topics/new">Add new</a>
+</p>
 
 <% topics.forEach(function(topic){ %>
   <li><%= topic.title %><img src="<%= topic.image %>" height="50" width="50"></li>
 <% }) %>
+
+<% include ../partials/footer %>
