@@ -7,7 +7,9 @@
 </p>
 
 <% topics.forEach(function(topic){ %>
-  <li><%= topic.title %><img src="<%= topic.image %>" height="50" width="50"></li>
+  <a href="/topics/<%= topic._id %>">
+    <li><%= topic.title %><img src="<%= topic.image %>" height="50" width="50"></li>
+  </a>
 <% }) %>
 
 <% include ../partials/footer %>
