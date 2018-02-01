@@ -8,8 +8,11 @@
 
 <p><img src="<%= topic.image %>" /></p>
 
+<a class="btn btn-danger" href="/topics/<%= topic._id %>/comments/new">New Comment</a>
+
 <% topic.comments.forEach(function(comment){ %>
-  <p><%= comment.author %> - <%= comment.text %></p>
+  <p><b><%= comment.author %></b> - <%= comment.text %></p>
 <% }) %>
+
 
 <% include ../partials/footer %>

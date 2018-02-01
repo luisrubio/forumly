@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const Topic = require("./models/topic");
+const Comment = require("./models/comment");
 const seedDB = require('./seeds');
 
 mongoose.connect("mongodb://lulu:lulu@ds263847.mlab.com:63847/teriyakirubi");
@@ -36,7 +37,7 @@ app.get("/topics", (req, res) => {
 });
 
 // NEW
-app.get("/topics/new", function(req, res){
+app.get("/topics/new", (req, res) => {
   res.render("topics/new");
 });
 
@@ -71,4 +72,38 @@ app.get("/topics/:id", (req, res) => {
   });
 });
 
+// **********************
+// comments route
+// **********************
+
+app.get("/topics/:id/comments/new", (req, res) => {
+  // find topic by id
+  Topic.findById(req.params.id, (err, topic) => {
+    if(err) {
+      console.log(err);
+    } else {
+      res.render("comments/new", {topic: topic});
+    }
+  })
+});
+
+app.post("/topics/:id/comments", (req, res) => {
+  // find topic by id
+  Topic.findById(req.params.id, (err, topic) => {
+    if(err){
+      console.log(err);
+      res.redirect("/topics");
+    } else {
+      Comment.create(req.body.comment, (err, comment) => {
+        if(err) {
+          console.log(err);
+        } else {
+          topic.comments.push(comment._id);
+          topic.save();
+          res.redirect("/topics/" + topic._id);
+        }
+      });
+    }
+  });
+});
 app.listen(3000, '0.0.0.0', () => console.log("Forumly started."));
