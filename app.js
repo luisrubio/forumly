@@ -2,8 +2,9 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const Topic = require("./models/topic");
 
-mongoose.connect("");
+mongoose.connect("mongodb://lulu:lulu@ds263847.mlab.com:63847/teriyakirubi");
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -13,26 +14,7 @@ app.get("/", (req, res) => {
 });
 
 // Topics Schema Setup
-const topicSchema = new mongoose.Schema({
-  title: String,
-  body: String,
-  image: String
-});
 
-const Topic = mongoose.model("Topic", topicSchema);
-
-// Topic.create(
-//   {
-//     title: 'Topic2',
-//     body: 'This is the main thing the person says.',
-//     image: 'https://cdn.bulbagarden.net/upload/thumb/0/0d/025Pikachu.png/250px-025Pikachu.png'
-//   }, function(err, campground){
-//     if(err){
-//       console.log(err);
-//     } else {
-//       console.log("Created");
-//     }
-// });
 
 // **********************
 // Topics route
