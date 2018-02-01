@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const Topic = require("./models/topic");
+const seedDB = require('./seeds');
 
 mongoose.connect("mongodb://lulu:lulu@ds263847.mlab.com:63847/teriyakirubi");
 
@@ -12,6 +13,9 @@ app.set("view engine", "ejs");
 app.get("/", (req, res) => {
   res.render("index");
 });
+
+
+seedDB();
 
 // Topics Schema Setup
 
@@ -58,7 +62,7 @@ app.post("/topics", (req, res) => {
 
 // SHOW
 app.get("/topics/:id", (req, res) => {
-  Topic.findById(req.params.id, function(err, foundTopic){
+  Topic.findById(req.params.id).populate("comments").exec(function(err, foundTopic){
     if(err){
       console.log(err);
     } else {
