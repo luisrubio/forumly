@@ -1,30 +1,81 @@
 <% include ../partials/header %>
 
-<h1>Topics SHOW</h1>
+<div class="post-title side-padding"><h3>
+  <%= topic.title %>
+</h3></div>
+<div class="row">
+  <div class="col-md-9">
 
-<p><%= topic.title %></p>
+    <div class="row">
 
-<p><%= topic.body %></p>
+        <div class="col-md-12">
+          <div class="side-padding">
+            <div class="post-info">
+              <strong><a class="author" href="#"><%= topic.author.username %></a></strong> 2h
+            </div>
+            <div class="post-body">
+              <p><%= topic.body %></p>
+            </div>
+        </div>
+        <div style="padding-bottom: 5px;">
+          <img
+          class="img-responsive"
+          src="<%= topic.image %>" />
+        </div>
+         <div>
+            <a class="btn btn-post"><i class="fa fa-comment" aria-hidden="true"></i> 0 Comments</a>
+          <div class="pull-right">
+            <a class="btn btn-post"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+            <a class="btn btn-post"><i class="fa fa-heart" aria-hidden="true"></i></a>
+            <a class="btn btn-post-reply"><i class="fa fa-reply" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<p>submitted by <%= topic.author.username %></p>
+    <hr style="margin: 5px 0" />
 
-<p><img src="<%= topic.image %>" /></p>
+    <div class="side-padding">
+      <% topic.comments.forEach(function(comment){ %>
+      <div class="row post-comment">
+          <div class="col-md-12">
+            <div class="post-info">
+              <strong><a href="#"><%= comment.author.username %></a></strong></b> 1h
+            </div>
+            <div class="post-body">
+              <p><%= comment.text %></p>
+            </div>
+            <div>
+            <div class="pull-right">
+              <a class="btn btn-post"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+              <a class="btn btn-post"><i class="fa fa-heart" aria-hidden="true"></i></a>
+              <a class="btn btn-post-reply"><i class="fa fa-reply" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+      <div style="padding-bottom: 10px;">
+        <a class="btn btn-default" href="#"><i class="fa fa-link fa-padding" aria-hidden="true"></i>Share</a>
+        <a class="btn btn-main" href="/topics/<%= topic._id %>/comments/new"><i class="fa fa-reply fa-padding" aria-hidden="true"></i>Reply</a>
+      </div>
+    </div>
+  </div>
 
-<a class="btn btn-danger" href="/topics/<%= topic._id %>/comments/new">New Comment</a>
+  <div class="col-md-3">
+    <div class="right-message side-padding">
+      #Tag
+    </div>
 
-<hr>
+    <% if(currentUser && topic.author.id.equals(currentUser._id)) { %>
+      <hr>
+      <a class="btn btn-warning btn-block" href="/topics/<%= topic._id %>/edit">Edit</a>
 
-<% if(currentUser && topic.author.id.equals(currentUser._id)) { %>
-<a class="btn btn-warning" href="/topics/<%= topic._id %>/edit">Edit</a>
-
-<form action="/topics/<%= topic._id %>?_method=DELETE" method="POST">
-  <button class="btn btn-danger">Delete</button>
-</form>
-<% } %>
-</form>
-<% topic.comments.forEach(function(comment){ %>
-  <p><b><%= comment.author.username %></b> - <%= comment.text %></p>
-<% }) %>
-
+      <form action="/topics/<%= topic._id %>?_method=DELETE" method="POST">
+        <button class="btn btn-danger btn-block">Delete</button>
+      </form>
+    <% } %>
+  </div>
+</div>
 
 <% include ../partials/footer %>
