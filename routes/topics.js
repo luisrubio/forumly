@@ -15,18 +15,24 @@ router.get("/", (req, res) => {
 });
 
 // NEW
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
   res.render("topics/new");
 });
 
 // CREATE
-router.post("/", (req, res) => {
+router.post("/", isLoggedIn, (req, res) => {
   // get data from form and add to topic array
   const title = req.body.title;
   const body = req.body.body;
   const image = req.body.image;
+  const author = {
+    id: req.user._id,
+    username: req.user.username
+  }
 
-  const newTopic = {title: title, body: body, image: image};
+  const newTopic = {title: title, body: body, image: image, author: author};
+
+
 
   // create a new topic and save to db
   Topic.create(newTopic, function(err, newlyCreatedTopic){

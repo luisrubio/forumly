@@ -6,6 +6,8 @@
 
 <p><%= topic.body %></p>
 
+<p>submitted by <%= topic.author.username %></p>
+
 <p><img src="<%= topic.image %>" /></p>
 
 <a class="btn btn-danger" href="/topics/<%= topic._id %>/comments/new">New Comment</a>

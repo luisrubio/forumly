@@ -4,6 +4,13 @@ const topicSchema = new mongoose.Schema({
   title: String,
   body: String,
   image: String,
+  author: {
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    },
+    username: String
+  },
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,
