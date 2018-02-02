@@ -32,8 +32,6 @@ router.post("/", isLoggedIn, (req, res) => {
 
   const newTopic = {title: title, body: body, image: image, author: author};
 
-
-
   // create a new topic and save to db
   Topic.create(newTopic, function(err, newlyCreatedTopic){
     if(err){
@@ -52,6 +50,41 @@ router.get("/:id", (req, res) => {
       console.log(err);
     } else {
       res.render('topics/show', {topic: foundTopic});
+    }
+  });
+});
+
+// EDIT
+router.get("/:id/edit", (req, res) => {
+  Topic.findById(req.params.id, function(err, foundTopic){
+    if(err){
+      res.redirect("/topics");
+    } else {
+      res.render("topics/edit", {topic: foundTopic});
+    }
+  });
+});
+
+// UPDATE
+router.put("/:id", (req, res) => {
+  // find and update topic
+  Topic.findByIdAndUpdate(req.params.id, req.body.topic, (err, updatedTopic) => {
+    if(err) {
+      res.redirect("/topics");
+    } else {
+      res.redirect("/topics/" + req.params.id);
+    }
+  });
+  // redirect to topic
+});
+
+// DESTROY
+router.delete("/:id", (req, res) => {
+  Topic.findByIdAndRemove(req.params.id, (err) => {
+    if(err){
+      res.redirect("/topics")
+    } else {
+      res.redirect("/topics")
     }
   });
 });
