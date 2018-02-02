@@ -11,7 +11,7 @@
 <a class="btn btn-danger" href="/topics/<%= topic._id %>/comments/new">New Comment</a>
 
 <% topic.comments.forEach(function(comment){ %>
-  <p><b><%= comment.author %></b> - <%= comment.text %></p>
+  <p><b><%= comment.author.username %></b> - <%= comment.text %></p>
 <% }) %>
 
 

@@ -10,31 +10,31 @@ const data = [
 function seedDB() {
   // Remove all topics
   Topic.remove({}, function(err){
-    if(err){
-      console.log(err);
-    }
-    console.log("remove campgrounds");
-
-    // add topics
-    data.forEach(function(seed){
-      Topic.create(seed, function(err, topic){
-        if(err){
-          console.log(err);
-        } else {
-          console.log("addded topic");
-          // create comment
-          Comment.create({text: 'Awesome!', author: 'Samus'}, function(err, comment){
-            if(err) {
-              console.log(err);
-            } else {
-              topic.comments.push(comment._id);
-              topic.save();
-              console.log("comment added");
-            }
-          });
-        }
-      })
-    });
+    // if(err){
+    //   console.log(err);
+    // }
+    // console.log("remove campgrounds");
+    //
+    // // add topics
+    // data.forEach(function(seed){
+    //   Topic.create(seed, function(err, topic){
+    //     if(err){
+    //       console.log(err);
+    //     } else {
+    //       console.log("addded topic");
+    //       // create comment
+    //       Comment.create({text: 'Awesome!', author: 'Samus'}, function(err, comment){
+    //         if(err) {
+    //           console.log(err);
+    //         } else {
+    //           topic.comments.push(comment._id);
+    //           topic.save();
+    //           console.log("comment added");
+    //         }
+    //       });
+    //     }
+    //   })
+    // });
   });
 
 

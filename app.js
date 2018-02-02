@@ -18,7 +18,7 @@ mongoose.connect("mongodb://lulu:lulu@ds263847.mlab.com:63847/teriyakirubi");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
-seedDB();
+// seedDB(); // Seed database
 
 // passport config
 app.use(require("express-session")({
