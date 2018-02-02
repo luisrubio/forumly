@@ -1,7 +1,6 @@
 <% include ../partials/header %>
 
 <h1>Topics SHOW</h1>
-<a class="btn btn-warning" href="/topics/<%= topic._id %>/edit">Edit</a>
 
 <p><%= topic.title %></p>
 
@@ -13,10 +12,15 @@
 
 <a class="btn btn-danger" href="/topics/<%= topic._id %>/comments/new">New Comment</a>
 
+<hr>
+
+<% if(currentUser && topic.author.id.equals(currentUser._id)) { %>
+<a class="btn btn-warning" href="/topics/<%= topic._id %>/edit">Edit</a>
+
 <form action="/topics/<%= topic._id %>?_method=DELETE" method="POST">
   <button class="btn btn-danger">Delete</button>
 </form>
-
+<% } %>
 </form>
 <% topic.comments.forEach(function(comment){ %>
   <p><b><%= comment.author.username %></b> - <%= comment.text %></p>

@@ -55,18 +55,14 @@ router.get("/:id", (req, res) => {
 });
 
 // EDIT
-router.get("/:id/edit", (req, res) => {
+router.get("/:id/edit", checkTopicOwner, (req, res) => {
   Topic.findById(req.params.id, function(err, foundTopic){
-    if(err){
-      res.redirect("/topics");
-    } else {
-      res.render("topics/edit", {topic: foundTopic});
-    }
+    res.render("topics/edit", {topic: foundTopic});
   });
 });
 
 // UPDATE
-router.put("/:id", (req, res) => {
+router.put("/:id", checkTopicOwner, (req, res) => {
   // find and update topic
   Topic.findByIdAndUpdate(req.params.id, req.body.topic, (err, updatedTopic) => {
     if(err) {
@@ -79,7 +75,7 @@ router.put("/:id", (req, res) => {
 });
 
 // DESTROY
-router.delete("/:id", (req, res) => {
+router.delete("/:id", checkTopicOwner, (req, res) => {
   Topic.findByIdAndRemove(req.params.id, (err) => {
     if(err){
       res.redirect("/topics")
@@ -94,6 +90,27 @@ function isLoggedIn(req, res, next) {
     return next();
   }
   res.redirect("/login");
+}
+
+function checkTopicOwner(req, res, next) {
+  if(req.isAuthenticated()) {
+
+    Topic.findById(req.params.id, function(err, foundTopic){
+      if(err){
+        res.redirect("back");
+      } else {
+        // do they own topic?
+        if(foundTopic.author.id.equals(req.user._id)) {
+          next();
+        // if not owner
+        } else {
+          res.redirect("back");
+        }
+      }
+    });
+  } else {
+    res.redirect("back");
+  }
 }
 
 module.exports = router;
