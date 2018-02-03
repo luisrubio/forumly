@@ -1,17 +1,24 @@
 <% include ../partials/header %>
 
-<div class="post-title side-padding"><h3>
-  <%= topic.title %>
-</h3></div>
-<div class="row">
+
+
+<div class="row" style="padding-top: 15px;">
   <div class="col-md-9">
-
     <div class="row">
-
         <div class="col-md-12">
           <div class="side-padding">
-            <div class="post-info">
-              <strong><a class="author" href="#"><%= topic.author.username %></a></strong> 2h
+            <div class="post-info" style="line-height: 120%;">
+              <span class="post-title"><a href="#"><%= topic.title %></a></span>
+
+              <% if(currentUser && topic.author.id.equals(currentUser._id)) { %>
+                <div class="pull-right">
+                  <a href="/topics/<%= topic._id %>/edit" class="btn btn-post-reply"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
+                </div>
+              <% } %>
+
+
+              <br>
+              posted 12 hours ago by <strong><a class="author" href="#"><%= topic.author.username %></a></strong>
             </div>
             <div class="post-body">
               <p><%= topic.body %></p>
@@ -22,7 +29,7 @@
           class="img-responsive"
           src="<%= topic.image %>" />
         </div>
-         <div>
+         <div class="side-padding">
             <a class="btn btn-post"><i class="fa fa-comment" aria-hidden="true"></i> 0 Comments</a>
           <div class="pull-right">
             <a class="btn btn-post"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
@@ -40,9 +47,9 @@
       <div class="row post-comment">
           <div class="col-md-12">
             <div class="post-info">
-              <strong><a href="#"><%= comment.author.username %></a></strong></b> 1h
+              <strong><a href="#"><%= comment.author.username %></a></strong></b> &#183; 12h
             </div>
-            <div class="post-body">
+            <div class="comment-body">
               <p><%= comment.text %></p>
             </div>
             <div>
@@ -64,17 +71,8 @@
 
   <div class="col-md-3">
     <div class="right-message side-padding">
-      #Tag
+      #tags
     </div>
-
-    <% if(currentUser && topic.author.id.equals(currentUser._id)) { %>
-      <hr>
-      <a class="btn btn-warning btn-block" href="/topics/<%= topic._id %>/edit">Edit</a>
-
-      <form action="/topics/<%= topic._id %>?_method=DELETE" method="POST">
-        <button class="btn btn-danger btn-block">Delete</button>
-      </form>
-    <% } %>
   </div>
 </div>
 

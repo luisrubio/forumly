@@ -5,7 +5,7 @@ const Topic = require("../models/topic");
 // INDEX
 router.get("/", (req, res) => {
   // get topics from DB
-  Topic.find({}, function(err, allTopics){
+  Topic.find({}).sort({'_id': -1}).exec(function(err, allTopics){
     if(err){
       console.log(err);
     } else {

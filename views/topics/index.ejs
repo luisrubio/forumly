@@ -1,31 +1,27 @@
 <% include ../partials/header %>
 
-<div class="post-title side-padding"><h3>
-  Topics
-</h3></div>
-<div class="side-padding">
-  <a class="btn btn-main" href="/topics/new">Add new</a>
-</div>
-<hr style="margin: 5px 0" />
+<div class="row" style="padding-top: 13px;">
+  <div class="col-md-9" style="padding-top: 5px;">
 
-
-<div class="row">
-  <div class="col-md-9">
+      <div class="row side-padding post-comment">
+        <div class="col-md-12" style="padding-bottom: 10px; color: #555; line-height: 100%;">
+          <span style="font-size: 1.2em;"><strong><a class="sticky" href="/topics/">This is a sticky/announcement post.</a></strong></span><br>
+          <span style="font-size: .82em;">posted 12 hours ago by User</span><br>
+          <span style="font-size: .82em;">2 comments</span>
+        </div>
+      </div>
     <% topics.forEach(function(topic){ %>
       <div class="row side-padding post-comment">
-        <!--<div class="col-md-1">
-          <% if(topic.image) { %>
-            <img src="<%= topic.image %>" height="50" width="50" />
-          <% } %>
-        </div>-->
-        <div class="col-md-12" style="padding-bottom: 5px; color: #555">
-          <a href="/topics/<%= topic._id %>"><h4><%= topic.title %></h4></a>
-          <%= topic.author.username %>
+        <div class="col-md-12" style="padding-bottom: 10px; color: #555; line-height: 100%;">
+          <span style="font-size: 1.2em;"><a href="/topics/<%= topic._id %>"><%= topic.title %></a></span><br>
+          <span style="font-size: .82em;">posted 12 hours ago by <%= topic.author.username %></span><br>
+          <span style="font-size: .82em;">2 comments</span>
         </div>
       </div>
     <% }) %>
   </div>
   <div class="col-md-3">
+    <p class="side-padding pull-right"><a class="btn btn-main" href="/topics/new">New post</a></p>
   </div>
 </div>
 
