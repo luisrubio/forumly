@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Topic = require("../models/topic");
+const middleware = require("../middleware");
 
 // INDEX
 router.get("/", (req, res) => {
@@ -15,12 +16,12 @@ router.get("/", (req, res) => {
 });
 
 // NEW
-router.get("/new", isLoggedIn, (req, res) => {
+router.get("/new", middleware.isLoggedIn, (req, res) => {
   res.render("topics/new");
 });
 
 // CREATE
-router.post("/", isLoggedIn, (req, res) => {
+router.post("/", middleware.isLoggedIn, (req, res) => {
   // get data from form and add to topic array
   const title = req.body.title;
   const body = req.body.body;
@@ -55,14 +56,14 @@ router.get("/:id", (req, res) => {
 });
 
 // EDIT
-router.get("/:id/edit", checkTopicOwner, (req, res) => {
+router.get("/:id/edit", middleware.checkTopicOwner, (req, res) => {
   Topic.findById(req.params.id, function(err, foundTopic){
     res.render("topics/edit", {topic: foundTopic});
   });
 });
 
 // UPDATE
-router.put("/:id", checkTopicOwner, (req, res) => {
+router.put("/:id", middleware.checkTopicOwner, (req, res) => {
   // find and update topic
   Topic.findByIdAndUpdate(req.params.id, req.body.topic, (err, updatedTopic) => {
     if(err) {
@@ -75,7 +76,7 @@ router.put("/:id", checkTopicOwner, (req, res) => {
 });
 
 // DESTROY
-router.delete("/:id", checkTopicOwner, (req, res) => {
+router.delete("/:id", middleware.checkTopicOwner, (req, res) => {
   Topic.findByIdAndRemove(req.params.id, (err) => {
     if(err){
       res.redirect("/topics")
@@ -84,33 +85,5 @@ router.delete("/:id", checkTopicOwner, (req, res) => {
     }
   });
 });
-
-function isLoggedIn(req, res, next) {
-  if(req.isAuthenticated()){
-    return next();
-  }
-  res.redirect("/login");
-}
-
-function checkTopicOwner(req, res, next) {
-  if(req.isAuthenticated()) {
-
-    Topic.findById(req.params.id, function(err, foundTopic){
-      if(err){
-        res.redirect("back");
-      } else {
-        // do they own topic?
-        if(foundTopic.author.id.equals(req.user._id)) {
-          next();
-        // if not owner
-        } else {
-          res.redirect("back");
-        }
-      }
-    });
-  } else {
-    res.redirect("back");
-  }
-}
 
 module.exports = router;
