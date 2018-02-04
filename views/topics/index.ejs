@@ -3,19 +3,19 @@
 <div class="row">
   <div class="col-md-9" style="padding-top: 5px;">
 
-      <div class="row side-padding post-comment">
+      <!-- <div class="row side-padding post-comment">
         <div class="col-md-12" style="padding-bottom: 10px; color: #555; line-height: 100%;">
           <span style="font-size: 1.2em;"><strong><a class="sticky" href="/topics/">This is a sticky/announcement post.</a></strong></span><br>
           <span style="font-size: .82em;">posted 12 hours ago by User</span><br>
-          <span style="font-size: .82em;">2 comments</span>
+          <span style="font-size: .82em;">0 comments</span>
         </div>
-      </div>
+      </div> -->
     <% topics.forEach(function(topic){ %>
       <div class="row side-padding post-comment">
         <div class="col-md-12" style="padding-bottom: 10px; color: #555; line-height: 100%;">
           <span style="font-size: 1.2em;"><a href="/topics/<%= topic._id %>"><%= topic.title %></a></span><br>
-          <span style="font-size: .82em;">posted 12 hours ago by <%= topic.author.username %></span><br>
-          <span style="font-size: .82em;">2 comments</span>
+          <span style="font-size: .82em;">posted <%= moment(topic.createdAt).fromNow() %> by <%= topic.author.username %></span><br>
+          <span style="font-size: .82em;">0 comments</span>
         </div>
       </div>
     <% }) %>

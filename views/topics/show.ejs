@@ -18,7 +18,7 @@
 
 
               <br>
-              posted 12 hours ago by <strong><a class="author" href="#"><%= topic.author.username %></a></strong>
+              posted <%= moment(topic.createdAt).fromNow() %> by <strong><a class="author" href="#"><%= topic.author.username %></a></strong>
             </div>
             <div class="post-body">
               <p><%= topic.body %></p>
@@ -47,22 +47,30 @@
       <div class="row post-comment">
           <div class="col-md-12">
             <div class="post-info">
-              <strong><a href="#"><%= comment.author.username %></a></strong></b> &#183; 12h
+              <strong><a href="#"><%= comment.author.username %></a></strong></b> &#183; <%= moment(comment.createdAt).fromNow() %>
             </div>
             <div class="comment-body">
               <p><%= comment.text %></p>
             </div>
             <div>
             <div class="pull-right">
-              <% if(currentUser && comment.author.id.equals(currentUser._id)) { %>
-              <form action="/topics/<%= topic._id %>/comments/<%= comment._id %>?_method=DELETE" method="post">
-                <button class="btn btn-danger">Delete</button>
-              </form>
-              <a href="/topics/<%= topic._id %>/comments/<%= comment._id %>/edit">EDIT COMMENT</a>
-              <% } %>
-              <a class="btn btn-post"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+
+              <a href="#" class="dropdown-toggle btn btn-post" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+              </a>
+              <ul class="dropdown-menu">
+                <% if(currentUser && comment.author.id.equals(currentUser._id)) { %>
+                  <li><a href="/topics/<%= topic._id %>/comments/<%= comment._id %>/edit"><i class="fa fa-edit" aria-hidden="true"></i> Edit Comment</a></li>
+                  <li role="separator" class="divider"></li>
+                <% } %>
+                <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i> <%= comment.author.username %>'s profile</a></li>
+              </ul>
+
+
               <a class="btn btn-post"><i class="fa fa-heart" aria-hidden="true"></i></a>
               <a class="btn btn-post-reply"><i class="fa fa-reply" aria-hidden="true"></i></a>
+
+
+            </li>
             </div>
           </div>
         </div>

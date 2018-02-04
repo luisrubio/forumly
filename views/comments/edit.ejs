@@ -12,7 +12,16 @@
     <button class="btn btn-main">Edit post</button>
   </form>
 
+  <hr>
+
+  <h3>Delete Comment</h3>
+
+  <form action="/topics/<%= topic_id %>/comments/<%= comment._id %>?_method=DELETE" method="post">
+    <button class="btn btn-danger">Delete</button>
+  </form>
+
 </div>
+
 
 
 
