@@ -6,7 +6,7 @@ const middleware = require("../middleware");
 // INDEX
 router.get("/", (req, res) => {
   // get topics from DB
-  Topic.find({}).sort({'_id': -1}).exec(function(err, allTopics){
+  Topic.find({}).sort({'_id': -1}).exec((err, allTopics) => {
     if(err){
       console.log(err);
     } else {
@@ -34,11 +34,13 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
   const newTopic = {title: title, body: body, image: image, author: author};
 
   // create a new topic and save to db
-  Topic.create(newTopic, function(err, newlyCreatedTopic){
+  Topic.create(newTopic, (err, newlyCreatedTopic) => {
     if(err){
+      req.flash("error", "Something went wrong");
       console.log(err);
     } else {
       // redirect to topic index
+      req.flash("error", "Successfully added post");
       res.redirect("/topics");
     }
   });
@@ -46,7 +48,7 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
 
 // SHOW
 router.get("/:id", (req, res) => {
-  Topic.findById(req.params.id).populate("comments").exec(function(err, foundTopic){
+  Topic.findById(req.params.id).populate("comments").exec((err, foundTopic) => {
     if(err){
       console.log(err);
     } else {

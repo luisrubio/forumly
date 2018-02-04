@@ -14,7 +14,7 @@
     }
 
     body {
-      padding-top: 41px;
+      padding-top: 56px;
     }
 
     /* bootstrap override */
@@ -231,5 +231,12 @@
         </div>
       </div>
     </nav>
-
     <div class="container">
+      <div class="side-padding">
+        <% if(error && error.length > 0) { %>
+          <div class="alert alert-danger"><%= error %></div>
+        <% } %>
+        <% if(success && success.length > 0) { %>
+          <div class="alert alert-success"><%= success %></div>
+        <% } %>
+      </div>

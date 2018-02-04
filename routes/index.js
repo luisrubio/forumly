@@ -17,10 +17,11 @@ router.post("/register", (req, res) => {
   const newUser = new User({username: req.body.username});
   User.register(newUser, req.body.password, (err, user) => {
     if(err) {
-      console.log(err);
-      return res.render("register");
+      req.flash("error", err.message);
+      return res.redirect("register");
     }
-    passport.authenticate("local")(req, res, function(){
+    passport.authenticate("local")(req, res, () => {
+      req.flash("success", "Welcome, " + user.username + "!");
       res.redirect("/topics");
     });
   });
@@ -35,7 +36,8 @@ router.get("/login", (req, res) => {
 router.post("/login", passport.authenticate("local",
   {
     successRedirect: "/topics",
-    failureRedirect: "/login"
+    failureRedirect: "/login",
+    failureFlash: true
   }), (req, res) => {
 });
 
@@ -44,12 +46,5 @@ router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/topics");
 });
-
-function isLoggedIn(req, res, next) {
-  if(req.isAuthenticated()){
-    return next();
-  }
-  res.redirect("/login");
-}
 
 module.exports = router;

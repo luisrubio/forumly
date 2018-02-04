@@ -26,6 +26,7 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
     } else {
       Comment.create(req.body.comment, (err, comment) => {
         if(err) {
+          req.flash("error", "Something went wrong");
           console.log(err);
         } else {
           // add user info to comment
@@ -36,6 +37,7 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
           comment.save();
           topic.comments.push(comment._id);
           topic.save();
+          req.flash("success", "Successfully added comment");
           res.redirect("/topics/" + topic._id);
         }
       });
