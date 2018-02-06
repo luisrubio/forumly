@@ -1,29 +1,21 @@
 <% include ../partials/header %>
 
 <div class="row">
-  <div class="col-md-9" style="padding-top: 5px;">
-
-      <!-- <div class="row side-padding post-comment">
-        <div class="col-md-12" style="padding-bottom: 10px; color: #555; line-height: 100%;">
-          <span style="font-size: 1.2em;"><strong><a class="sticky" href="/topics/">This is a sticky/announcement post.</a></strong></span><br>
-          <span style="font-size: .82em;">posted 12 hours ago by User</span><br>
-          <span style="font-size: .82em;">0 comments</span>
-        </div>
-      </div> -->
+  <div class="col-md-9">
+    <!-- posts index -->
     <% topics.forEach(function(topic){ %>
-      <div class="row side-padding post-comment">
-        <div class="col-md-12" style="padding-bottom: 10px; color: #555; line-height: 100%;">
-          <span style="font-size: 1.2em;"><a href="/topics/<%= topic._id %>"><%= topic.title %></a></span><br>
-          <span style="font-size: .82em;">posted <%= moment(topic.createdAt).fromNow() %> by <%= topic.author.username %></span><br>
-          <span style="font-size: .82em;">0 comments</span>
+      <div class="row">
+        <div class="col-md-12 post-index">
+          <p class="post-title"><a href="/topics/<%= topic._id %>"><%= topic.title %></a></p>
+          <p>posted <%= moment(topic.createdAt).fromNow() %> by <%= topic.author.username %></p>
+          <p><%= topic.comments.length %> comments</p>
         </div>
       </div>
     <% }) %>
   </div>
   <div class="col-md-3">
-    <p class="side-padding pull-right"><a class="btn btn-main" href="/topics/new">New post</a></p>
+    <p class="pull-right"><a class="btn btn-main" href="/topics/new">New post</a></p>
   </div>
 </div>
-
 
 <% include ../partials/footer %>

@@ -1,17 +1,18 @@
 <% include ../partials/header %>
 
-<div class="side-padding">
-  
-  <h3>New Comment Form for "<%= topic.title %>"</h3>
-
-  <form action="/topics/<%= topic._id %>/comments" method="POST">
-    <div class="form-group">
-      <label for="text"></label>
-      <textarea class="form-control" name="comment[text]" id="text" rows="5"></textarea>
+<div class="row">
+  <div class="col-md-8">
+    <div class="post-body round">
+      <h3>New Comment Form for "<%= topic.title %>"</h3>
+      <form action="/topics/<%= topic._id %>/comments" method="POST">
+        <div class="form-group">
+          <label for="text"></label>
+          <textarea class="form-control" name="comment[text]" id="text" rows="5"></textarea>
+        </div>
+        <button class="btn btn-main">Submit post</button>
+      </form>
     </div>
-    <button class="btn btn-main">Submit post</button>
-  </form>
-
+  </div>
 </div>
 
 <% include ../partials/footer %>

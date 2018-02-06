@@ -12,7 +12,7 @@
   <body>
     <!-- navbar -->
       <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container side-padding">
+      <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -54,12 +54,10 @@
         </div>
       </div>
     </nav>
-    <div class="container">
-      <div class="side-padding">
+    <div class="container-fluid">
         <% if(error && error.length > 0) { %>
           <div class="alert alert-danger"><%= error %></div>
         <% } %>
         <% if(success && success.length > 0) { %>
           <div class="alert alert-success"><%= success %></div>
         <% } %>
-      </div>

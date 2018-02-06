@@ -6,7 +6,7 @@ const middleware = require("../middleware");
 // INDEX
 router.get("/", (req, res) => {
   // get topics from DB
-  Topic.find({}).sort({'_id': -1}).exec((err, allTopics) => {
+  Topic.find({}).sort({'_id': -1}).populate("comments").exec((err, allTopics) => {
     if(err){
       console.log(err);
     } else {

@@ -1,91 +1,70 @@
 <% include ../partials/header %>
 
-
-
 <div class="row">
-  <div class="col-md-9">
-    <div class="row">
-        <div class="col-md-12">
-          <div class="side-padding">
-            <div class="post-info" style="line-height: 120%;">
-              <span class="post-title"><a href="#"><%= topic.title %></a></span>
-
-              <% if(currentUser && topic.author.id.equals(currentUser._id)) { %>
-                <div class="pull-right">
-                  <a href="/topics/<%= topic._id %>/edit" class="btn btn-post-reply"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
-                </div>
-              <% } %>
-
-
-              <br>
-              posted <%= moment(topic.createdAt).fromNow() %> by <strong><a class="author" href="#"><%= topic.author.username %></a></strong>
-            </div>
-            <div class="post-body">
-              <p><%= topic.body %></p>
-            </div>
-        </div>
-        <div style="padding-bottom: 5px;">
-          <img
-          class="img-responsive"
-          src="<%= topic.image %>" />
-        </div>
-         <div class="side-padding">
-            <a class="btn btn-post"><i class="fa fa-comment" aria-hidden="true"></i> 0 Comments</a>
+  <div class="col-md-10">
+    <div class="post-box round">
+      <!-- 1 / 4 -->
+      <div class="post-info">
+        <span class="post-title">
+          <a href="#"><%= topic.title %></a>
+        </span>
+        <!-- edit post button -->
+        <% if(currentUser && topic.author.id.equals(currentUser._id)) { %>
           <div class="pull-right">
-            <a class="btn btn-post"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
-            <a class="btn btn-post"><i class="fa fa-heart" aria-hidden="true"></i></a>
-            <a class="btn btn-post-reply"><i class="fa fa-reply" aria-hidden="true"></i></a>
+            <a href="/topics/<%= topic._id %>/edit" class="btn btn-post-reply">
+              <i class="fa fa-edit" aria-hidden="true"></i> Edit
+            </a>
           </div>
+        <% } %>
+        <!-- 2/4 -->
+        <div>
+          posted <%= moment(topic.createdAt).fromNow() %> by
+          <strong>
+            <a class="author" href="#"><%= topic.author.username %></a>
+          </strong>
         </div>
       </div>
+      <!-- 3 / 4 -->
+      <div class="post-body round">
+      <%- topic.body %>
+      <% if(topic.image) { %>
+        <img class="img-responsive" src="<%= topic.image %>">
+      <% } %>
+      </div>
+      <!-- 4 / 4 -->
+      <div class="post-links">
+        <strong>
+          <%= topic.comments.length %> comments
+          &nbsp;
+          reply
+        </strong>
+      </div>
     </div>
-
-    <hr style="margin: 5px 0" />
-
-    <div class="side-padding">
-      <% topic.comments.forEach(function(comment){ %>
-      <div class="row post-comment">
-          <div class="col-md-12">
-            <div class="post-info">
-              <strong><a href="#"><%= comment.author.username %></a></strong></b> &#183; <%= moment(comment.createdAt).fromNow() %>
-            </div>
-            <div class="comment-body">
-              <p><%= comment.text %></p>
-            </div>
-            <div>
-            <div class="pull-right">
-
-              <a href="#" class="dropdown-toggle btn btn-post" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-              </a>
-              <ul class="dropdown-menu">
-                <% if(currentUser && comment.author.id.equals(currentUser._id)) { %>
-                  <li><a href="/topics/<%= topic._id %>/comments/<%= comment._id %>/edit"><i class="fa fa-edit" aria-hidden="true"></i> Edit Comment</a></li>
-                  <li role="separator" class="divider"></li>
-                <% } %>
-                <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i> <%= comment.author.username %>'s profile</a></li>
-              </ul>
-
-
-              <a class="btn btn-post"><i class="fa fa-heart" aria-hidden="true"></i></a>
-              <a class="btn btn-post-reply"><i class="fa fa-reply" aria-hidden="true"></i></a>
-
-
-            </li>
-            </div>
-          </div>
+    <!-- user options -->
+    <div style="padding: 10px 0;">
+      <a class="btn btn-default" href="#">
+        <i class="fa fa-link fa-padding" aria-hidden="true"></i>Share
+      </a>
+      <a class="btn btn-main" href="/topics/<%= topic._id %>/comments/new">
+        <i class="fa fa-reply fa-padding" aria-hidden="true"></i>Reply
+      </a>
+    </div>
+    <!-- post comments -->
+    <% topic.comments.forEach(function(comment){ %>
+      <div class="comment-box">
+        <div class="post-info">
+          <strong><a href="#"><%= comment.author.username %></a></strong></b> &#183; <%= moment(comment.createdAt).fromNow() %>
         </div>
+        <p>
+          <%= comment.text %>
+        </p>
       </div>
-      <% }) %>
-      <div style="padding-bottom: 10px;">
-        <a class="btn btn-default" href="#"><i class="fa fa-link fa-padding" aria-hidden="true"></i>Share</a>
-        <a class="btn btn-main" href="/topics/<%= topic._id %>/comments/new"><i class="fa fa-reply fa-padding" aria-hidden="true"></i>Reply</a>
-      </div>
-    </div>
+    <% }) %>
   </div>
-
-  <div class="col-md-3">
-    <div class="right-message side-padding">
-      #tags
+  <!-- section right -->
+  <div class="col-md-2">
+    <div class="right-message">
+      tags
     </div>
   </div>
 </div>

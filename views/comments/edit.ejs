@@ -1,28 +1,22 @@
 <% include ../partials/header %>
 
-<div class="side-padding">
-
-  <h3>Edit Comment</h3>
-
-  <form action="/topics/<%= topic_id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
-    <div class="form-group">
-      <label for="text"></label>
-      <textarea class="form-control" name="comment[text]" id="text" rows="5"><%= comment.text %></textarea>
+<div class="row">
+  <div class="col-md-8">
+    <div class="post-body round">
+      <h3>Edit Comment</h3>
+      <form action="/topics/<%= topic_id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
+        <div class="form-group">
+          <label for="text"></label>
+          <textarea class="form-control" name="comment[text]" id="text" rows="5"><%= comment.text %></textarea>
+        </div>
+        <button class="btn btn-main">Edit post</button>
+      </form>
+      <h3>Delete Comment</h3>
+      <form action="/topics/<%= topic_id %>/comments/<%= comment._id %>?_method=DELETE" method="post">
+        <button class="btn btn-danger">Delete</button>
+      </form>
     </div>
-    <button class="btn btn-main">Edit post</button>
-  </form>
-
-  <hr>
-
-  <h3>Delete Comment</h3>
-
-  <form action="/topics/<%= topic_id %>/comments/<%= comment._id %>?_method=DELETE" method="post">
-    <button class="btn btn-danger">Delete</button>
-  </form>
-
+  </div>
 </div>
-
-
-
 
 <% include ../partials/footer %>
