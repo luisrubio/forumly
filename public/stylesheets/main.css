@@ -1,66 +1,93 @@
-/*
-bootstrap override
-*/
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@media (min-width: 1000px) {
+  .container {
+    max-width: 900px;
+  }
+}
 
 body {
-  padding-top: 56px;
+  padding-top: 61px;
+  color: #444;
 }
 
 .navbar {
   margin-bottom: 0 !important;
-  min-height: 40px;
+  min-height: 50px;
+  font-size: 1.4em;
+  font-weight: 600;
 }
 
 .navbar-default {
-  border-top: 2px solid #0097e6;
-  border-bottom: 1px solid #f1f1f1;
-  background: #fff;
+  background-color: #468;
+}
+
+.navbar-default .navbar-brand,
+.navbar-default .navbar-brand:hover {
+    color: #fff;
+    font-size: 1.7em;
+    font-weight: 100;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #fff;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #468;
+    background-color: #f1f1f1;
 }
 
 .navbar-brand {
   padding: 0 15px;
-  height: 40px;
-  line-height: 40px;
+  height: 50px;
+  line-height: 50px;
+  font-family: 'Slabo 27px', serif;
 }
 
 .navbar-toggle {
-  margin-top: 3px;
+  margin-top: 8px;
   padding: 9px 10px !important;
 }
 
+
 @media (min-width: 768px) {
 .navbar-nav > li > a {
-  padding-top: 6.5px;
-  padding-bottom: 6.5px;
-  line-height: 27px;
+  padding-top: 11.5px;
+  padding-bottom: 11.5px;
+  line-height: 28px;
   }
 }
 
 .btn {
-  border-radius: 0;
   border: 0;
 }
 
 .btn.btn-main {
   color: #fff;
-  background: #2980b9;
+  background: #468;
 }
 
 .btn.btn-main:hover {
-  color: #fff;
-  background: #216796;
+  color: #f1f1f1;
+  background: #468;
 }
 
 .btn.btn-default {
-  border-radius: 0;
-  border: 0;
-  color: #666;
-  background: #f0f0f0;
+  border: 1px solid #468;
+  color: #468;
+  background: #fff;
+  transition: .2s;
 }
 
 .btn.btn-default:hover {
-  color: #f0f0f0;
-  background: #bbb;
+  color: #fff;
+  background: #468;
 }
 
 .btn.btn-post {
@@ -176,4 +203,18 @@ a.author:hover {color:#4b4b4b;}
   max-width: 900px;
   margin-bottom: 6px;
   color: #555;
+}
+
+a:link, a:visited {
+    color: #468;
+}
+
+a:hover {
+    color: #444;
+}
+
+.form-control {
+  padding: 20px 10px;
+  font-size: 1.4em;
+  background-color: #eeeeef;
 }

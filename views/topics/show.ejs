@@ -53,7 +53,7 @@
     <% topic.comments.forEach(function(comment){ %>
       <div class="comment-box">
         <div class="post-info">
-          <strong><a href="#"><%= comment.author.username %></a></strong></b> &#183; <%= moment(comment.createdAt).fromNow() %>
+          <strong><a class="author" href="#"><%= comment.author.username %></a></strong></b> &#183; <%= moment(comment.createdAt).fromNow() %>
         </div>
         <p>
           <%= comment.text %>
