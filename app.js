@@ -14,6 +14,7 @@ const seedDB = require('./seeds');
 const indexRoutes = require("./routes/index");
 const commentRoutes = require("./routes/comments");
 const topicRoutes = require("./routes/topics");
+const userRoutes = require("./routes/users");
 
 mongoose.connect("mongodb://lulu:lulu@ds263847.mlab.com:63847/teriyakirubi");
 
@@ -50,5 +51,7 @@ app.use(function(req, res, next) {
 app.use(indexRoutes);
 app.use("/topics/:id/comments", commentRoutes);
 app.use("/topics", topicRoutes);
+app.use("/users", userRoutes);
+
 
 app.listen(3000, '0.0.0.0', () => console.log("Forumly started."));
