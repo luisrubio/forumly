@@ -1,1 +1,9 @@
-<h1>User Profile page.</h1>
+<% include ../partials/header %>
+
+<h1>User profile page.</h1>
+
+<p><%= user.username %>'s profile</p>
+
+<p><strong>Joined:</strong> <%= user._id.getTimestamp() %></p>
+
+<% include ../partials/footer %>

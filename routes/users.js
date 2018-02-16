@@ -1,10 +1,17 @@
 const express = require("express");
 const router = express.Router();
-// const Topic = require("../models/user");
+const User = require("../models/user");
 
 // SHOW user profile
 router.get('/:id', (req, res) => {
-  res.render('users/show')
+  User.findById(req.params.id, (err, user) => {
+    if(err){
+      console.log("error");
+      res.redirect('/');
+    } else {
+      res.render('users/show', {user: user})
+    }
+  })
 });
 
 module.exports = router;

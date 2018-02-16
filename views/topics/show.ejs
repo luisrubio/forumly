@@ -20,7 +20,7 @@
         <div>
           posted <%= moment(topic.createdAt).fromNow() %> by
           <strong>
-            <a class="author" href="#"><%= topic.author.username %></a>
+            <a class="author" href="/users/<%= topic.author.id %>"><%= topic.author.username %></a>
           </strong>
         </div>
       </div>
