@@ -49,6 +49,23 @@
         <i class="fa fa-reply fa-padding" aria-hidden="true"></i>Reply
       </a>
     </div>
+
+    <% if(currentUser) { %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="post-body round">
+          <form action="/topics/<%= topic._id %>/comments" method="POST">
+            <div class="form-group">
+              <label for="text">Write a comment</label>
+              <textarea class="form-control" name="comment[text]" id="text" rows="5"></textarea>
+            </div>
+            <p><button class="btn btn-main">Comment <i class="fa fa-comment" aria-hidden="true"></i></button></p>
+          </form>
+        </div>
+      </div>
+    </div><br>
+    <% } %>
+
     <!-- post comments -->
     <% topic.comments.forEach(function(comment){ %>
       <div class="comment-box">
